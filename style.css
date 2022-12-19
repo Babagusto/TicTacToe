@@ -11,6 +11,11 @@
   
   .grid-item {
     padding: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+  }
+  .grid-item:active {
+    padding: 1em;
+    border: 1px solid rgb(221, 221, 221);
     text-align: center;
   }

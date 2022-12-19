@@ -1,4 +1,4 @@
-const Gameboard = ['X','O','O','O','X','X','O','X','O'];
+const Gameboard = ['','','','','','','','',''];
 
 
 const Players = [];
@@ -23,11 +23,12 @@ const showGameboard = (() => {
     let cell = document.createElement("div")
     cell.addEventListener("click", addMark)
     gameGrid.appendChild(cell).className = "grid-item"
-    function addMark() {
-        if (cell.innerText != " "){
+        function addMark() {
+            if (cell.innerText === ""){
             switchPlayer()
             cell.innerText = currentPlayer.sign
-        }}
+            }
+        } 
     }
     function switchPlayer () {
         if (currentPlayer === Players[0]) {
@@ -36,5 +37,8 @@ const showGameboard = (() => {
             currentPlayer = Players[0]
         }
         return currentPlayer
+    }
+    function checkScore() {
+
     }
 })();
