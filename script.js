@@ -1,6 +1,17 @@
 const Gameboard = ['','','','','','','','',''];
 
 
+const winGame = [
+        [0,1,2], 
+        [3,4,5],  
+        [6,7,8], 
+        [0,3,6],
+        [1,4,7],      
+        [2,5,8],
+        [0,4,8],
+        [2,4,6] 
+];
+
 const Players = [];
 
 let currentPlayer
@@ -17,17 +28,24 @@ const Bobby = makePlayer("bob", "O")
 
 const showGameboard = (() => {
     const gameGrid = document.getElementById("gameboard_container")
+    const gameStatus = document.getElementById("status")
+    
     gameGrid.style.setProperty('--grid-rows', 3);
     gameGrid.style.setProperty('--grid-cols', 3)
-    for (var i = 0; i < (3 * 3); i++){
+    for (var i = 0; i < Gameboard.length; i++){
     let cell = document.createElement("div")
+    cell.setAttribute("id", [i])
+    cell.innerText = Gameboard[i]
     cell.addEventListener("click", addMark)
     gameGrid.appendChild(cell).className = "grid-item"
         function addMark() {
             if (cell.innerText === ""){
             switchPlayer()
             cell.innerText = currentPlayer.sign
-            }
+            
+            updateArray()
+            checkScore(Gameboard)
+            } 
         } 
     }
     function switchPlayer () {
@@ -39,6 +57,30 @@ const showGameboard = (() => {
         return currentPlayer
     }
     function checkScore() {
+        gameStatus.innerText = "In Progress!"
+        let roundWon = false;
+        for (let i = 0; winGame.length; i++){
+        const condition = winGame[i];
+        const cellA = Gameboard[condition[0]];
+        const cellB = Gameboard[condition[1]];
+        const cellC = Gameboard[condition[2]];
+        
+        if(cellA == "" || cellB == "" || cellC == ""){
+            roundWon = false;
+        }
+        else if(cellA == cellB && cellB == cellC){
+            gameStatus.innerText = currentPlayer.name + " is Winner Winner"
 
+            roundWon = true;
+        }
+    }}
+    function updateArray() {
+    let arrayNum = event.srcElement.id
+    Gameboard[arrayNum] = currentPlayer.sign
     }
+    function reset() {
+        Gameboard = Gameboard = ['','','','','','','','',''];
+        return Gameboard;
+    }
+    
 })();
