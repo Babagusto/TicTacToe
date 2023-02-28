@@ -1,4 +1,4 @@
-const Gameboard = ['','','','','','','','',''];
+
 
 
 const winGame = [
@@ -25,13 +25,17 @@ const makePlayer = (name, sign) => {
 
 const Jimmie = makePlayer("jim", "X")
 const Bobby = makePlayer("bob", "O")
+const Computer = makePlayer("AI","" )
 
 const showGameboard = (() => {
+
+    let Gameboard = ['','','','','','','','',''];
     const gameGrid = document.getElementById("gameboard_container")
     const gameStatus = document.getElementById("status")
     
     gameGrid.style.setProperty('--grid-rows', 3);
     gameGrid.style.setProperty('--grid-cols', 3)
+
     for (var i = 0; i < Gameboard.length; i++){
     let cell = document.createElement("div")
     cell.setAttribute("id", [i])
@@ -78,9 +82,11 @@ const showGameboard = (() => {
     let arrayNum = event.srcElement.id
     Gameboard[arrayNum] = currentPlayer.sign
     }
-    function reset() {
-        Gameboard = Gameboard = ['','','','','','','','',''];
-        return Gameboard;
-    }
+ 
     
 })();
+function reset() {
+    Gameboard = ['','','','','','','','',''];
+    console.log(Gameboard)
+    showGameboard.updateArray()
+}
